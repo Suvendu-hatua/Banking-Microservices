@@ -1,0 +1,9 @@
+[submodule "accounts-service"]
+	path = accounts-service
+	url = https://github.com/Suvendu-hatua/accounts-service.git
+[submodule "cards-service"]
+	path = cards-service
+	url = https://github.com/Suvendu-hatua/cards-service.git
+[submodule "loans-service"]
+	path = loans-service
+	url = https://github.com/Suvendu-hatua/loans-service.git
