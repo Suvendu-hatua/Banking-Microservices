@@ -1,0 +1,107 @@
+version: "3.8"
+
+services:
+  accounts-db:
+    image: mysql:8
+    container_name: accounts-db
+    environment:
+      MYSQL_DATABASE: accountsdb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3307:3306"
+    networks:
+      - backend
+
+  accounts-service:
+    image: "suvenduhatua01/accounts:s1"
+    container_name: "accounts-ms"
+    environment:
+      DB_URL: jdbc:mysql://accounts-db:3306/accountsdb
+      DB_USERNAME: user
+      DB_PASSWORD: password
+    ports:
+      - "8080:8080"
+    depends_on:
+      - accounts-db
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - backend
+    command: ["sh", "-c", "sleep 20 && java -jar app.jar"]
+
+  cards-db:
+    image: mysql:8
+    container_name: cards-db
+    environment:
+      MYSQL_DATABASE: cardsdb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3308:3306"
+    networks:
+      - backend
+
+  cards-service:
+    image: "suvenduhatua01/cards:s1"
+    container_name: "cards-ms"
+    environment:
+      DB_URL: jdbc:mysql://cards-db:3306/cardsdb
+      DB_USERNAME: user
+      DB_PASSWORD: password
+    ports:
+      - "8090:8090"
+    depends_on:
+      - cards-db
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - backend
+    command: ["sh", "-c", "sleep 20 && java -jar Cards-0.0.1-SNAPSHOT.jar"]
+
+  loans-db:
+    image: mysql:8
+    container_name: loans-db
+    environment:
+      MYSQL_DATABASE: loansdb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3309:3306"
+    networks:
+      - backend
+
+  loans-service:
+    image: "suvenduhatua01/loans:s1"
+    container_name: "loans-ms"
+    environment:
+      DB_URL: jdbc:mysql://loans-db:3306/loansdb
+      DB_USERNAME: user
+      DB_PASSWORD: password
+    ports:
+      - "8099:8099"
+    depends_on:
+      - loans-db
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - backend
+    command: ["sh", "-c", "sleep 20 && java -jar Loans-0.0.1-SNAPSHOT.jar"]
+
+networks:
+  backend:
+    driver: "bridge"
+
+
+
+
+
