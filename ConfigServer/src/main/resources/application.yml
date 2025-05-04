@@ -1,0 +1,20 @@
+#spring.application.name=ConfigServer
+
+spring:
+  application:
+    name: "configserver"
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: "classpath:/config"
+
+
+#server - port setting
+server:
+  port: 8071
+
+
+
