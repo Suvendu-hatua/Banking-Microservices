@@ -1,7 +1,7 @@
 build:
   version: "3.1"
 
-cards:
+loans:
   message: "Welcome to Loans service related local APIs "
   contactDetails:
     name: "Alexa Lech - Developer"
